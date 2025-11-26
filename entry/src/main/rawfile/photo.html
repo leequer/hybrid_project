@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>相册选择</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #007dff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #photoContainer {
+            text-align: center;
+            margin-top: 20px;
+        }
+        #photo {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>选择照片</h1>
+        <button onclick="openAlbum()">打开相册</button>
+        <div id="photoContainer">
+            <img id="photo" src="" alt="选择的照片">
+        </div>
+    </div>
+
+    <script>
+        function openAlbum() {
+            // 调用原生方法打开相册
+            heima.openAlbum('displayPhoto');
+        }
+
+        function displayPhoto(photoUri) {
+            // 显示选择的照片
+            const photoElement = document.getElementById('photo');
+            photoElement.src = photoUri;
+        }
+    </script>
+</body>
+</html>

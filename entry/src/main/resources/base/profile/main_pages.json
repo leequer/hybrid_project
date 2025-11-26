@@ -3,7 +3,6 @@
     "pages/Index",
     "pages/ResourcePage",
     "pages/ConnectPage",
-    "pages/CallPage",
     "pages/HotReload",
     "pages/WebPage"
   ]
