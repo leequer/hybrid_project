@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<h1>h5测试</h1>
+<button onclick="sendMessage()">发送消息到原生端</button>
+<h2 id="myH2" style="color: red; font-size: 40px;"></h2>
+<script>
+      // 接收的端口是用来通信的  缓存到全局
+       var currentPort // 全局端口
+       window.addEventListener("message", (event) => {
+           if(event.data === "trans_port") {
+             currentPort = event.ports[0]
+             if(currentPort) {
+              // alert("接收端口成功")
+              currentPort.onmessage = (event) => {
+                 document.querySelector("#myH2").innerText = event.data
+              }
+             }
+           }
+       })
+
+       function sendMessage () {
+        if(currentPort) {
+            currentPort.postMessage( JSON.stringify({ type: 'change', message: Date.now() }) )
+        }
+       }
+    </script>
+</body>
+</html>
