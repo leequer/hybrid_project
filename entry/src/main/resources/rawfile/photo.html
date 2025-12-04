@@ -1,29 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>相册选择器</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .image-container {
+            width: 200px;
+            height: 200px;
+            border: 3px dashed #ccc;
+            border-radius: 15px;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #f9f9f9;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-container.placeholder::before {
+            content: '点击按钮选择图片';
+            color: #999;
+            font-size: 14px;
+        }
+
+        .btn-open-album {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-open-album:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-open-album:active {
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-    <img id="myImg" src="" alt="" style="width: 200px;height: 200px;">
-    <input id="login" />
-    <button onclick="openPhoto()">打开相册</button>
-    <script>
-        // 打开相册的方法
-      function openPhoto () {
-       // window.heima
-        if(window.heima) {
-          window.heima.openAlbum("getPhoto")
-        }
-      }
-      function test (value) {
-         document.querySelector("#login").value = value
-      }
-      function getPhoto (url) {
-        document.querySelector("#myImg").src = url
-      }
+    <div class="container">
+        <h1>相册选择器</h1>
+        <div id="imageContainer" class="image-container placeholder">
+            <img id="selectedImage" src="" alt="">
+        </div>
+        <button class="btn-open-album" onclick="openAlbum()">打开相册</button>
+    </div>
 
+    <script>
+        // 打开相册
+        function openAlbum() {
+            if (window.heima) {
+                window.heima.openAlbum('displayImage');
+            } else {
+                alert('原生功能未加载，请重试');
+            }
+        }
+
+        // 显示选择的图片
+        function displayImage(url) {
+            const imageContainer = document.getElementById('imageContainer');
+            const selectedImage = document.getElementById('selectedImage');
+            
+            // 设置图片URL
+            selectedImage.src = url;
+            
+            // 移除占位符样式
+            imageContainer.classList.remove('placeholder');
+        }
     </script>
 </body>
 </html>
