@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>相册选择器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        #imageContainer {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        #selectedImage {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 4px;
+        }
+        #noImageText {
+            color: #666;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>相册选择器</h1>
+        <div id="imageContainer">
+            <p id="noImageText">请点击"打开相册"按钮选择一张图片</p>
+            <img id="selectedImage" style="display: none;" />
+        </div>
+    </div>
+
+    <script>
+        // 用于更新图片的JavaScript函数
+        window.updateImage = function(imagePath) {
+            const imgElement = document.getElementById('selectedImage');
+            const noImageText = document.getElementById('noImageText');
+            
+            if (imagePath) {
+                // 将图片路径转换为可在WebView中显示的格式
+                imgElement.src = imagePath;
+                imgElement.style.display = 'block';
+                noImageText.style.display = 'none';
+            } else {
+                imgElement.style.display = 'none';
+                noImageText.style.display = 'block';
+            }
+        };
+    </script>
+</body>
+</html>
